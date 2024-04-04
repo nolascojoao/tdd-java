@@ -1,5 +1,19 @@
 # Compiled class file
 *.class
+*.iml
+
+# Build files
+target/
+build/
+
+# IDE-specific configuration files
+.idea/
+.eclipse/
+.vscode/
+
+# Cache files
+.gradle/
+.mvn/
 
 # Log file
 *.log
