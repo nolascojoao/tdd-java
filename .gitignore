@@ -11,6 +11,11 @@ build/
 .eclipse/
 .vscode/
 
+# Eclipse
+.settings
+.classpath
+.project
+
 # Cache files
 .gradle/
 .mvn/
