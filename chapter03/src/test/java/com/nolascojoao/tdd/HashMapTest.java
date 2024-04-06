@@ -5,51 +5,49 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class HashMapTest {
 
-	@Test
-	public void testPutAndGet() {
-		HashMap<String, String> map = new HashMap<>();
+	private HashMap<String, String> hashMap;
 
-		map.put("name", "Pedro");
-
-		assertEquals("Pedro", map.get("name"));
+	@BeforeEach
+	public void setUpHashMap() {
+		hashMap = new HashMap<>();
 	}
 
 	@Test
-	public void testReplacement() {
-		HashMap<String, String> map = new HashMap<>();
+	public void shouldGetValueWhenObjectStoredWithPut() {
+		hashMap.put("name", "Pedro");
 
-		map.put("name", "Pedro");
-
-		// HashMap does not allow duplicate keys
-		// if a key is added again its corresponding value will be replaced
-		map.put("name", "João");
-
-		assertEquals("João", map.get("name"));
+		assertEquals("Pedro", hashMap.get("name"));
 	}
 
 	@Test
-	public void testClear() {
-		HashMap<String, String> map = new HashMap<>();
-		
-		map.put("name", "Pedro");
-		map.put("name", "João");
+	public void shouldReplaceOldValueWhenAddingSecondObjectWithSameKey() {
+		hashMap.put("name", "Pedro");
 
-		map.clear();
+		hashMap.put("name", "João");
 
-		assertTrue(map.isEmpty());
+		assertEquals("João", hashMap.get("name"));
 	}
-	
+
 	@Test
-	public void testNullKey() {
-		HashMap<String, String> map = new HashMap<>();
-		
-		map.put(null, "Nolasco");
-		
-		assertEquals("Nolasco", map.get(null));
+	public void shouldRemoveAllContentWhenClearMethodCalled() {
+		hashMap.put("name", "Pedro");
+		hashMap.put("name", "João");
+
+		hashMap.clear();
+
+		assertTrue(hashMap.isEmpty());
+	}
+
+	@Test
+	public void shouldAllowNullAsKey() {
+		hashMap.put(null, "Nolasco");
+
+		assertEquals("Nolasco", hashMap.get(null));
 	}
 
 }
