@@ -35,7 +35,7 @@ public class ReverseStringTest {
 		});
 	}
 
-	public static List<Object[]> getString() {
+	private static List<Object[]> getString() {
 		return Arrays.asList(new Object[][] { 
 			{ "a", "a" }, 
 			{ "hello", "olleh" }, 
