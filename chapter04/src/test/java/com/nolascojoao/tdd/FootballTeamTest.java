@@ -1,6 +1,7 @@
 package com.nolascojoao.tdd;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -25,6 +26,18 @@ public class FootballTeamTest {
 	public void constructorShouldSetGamesWon(int numberOfGamesWon) {
 		FootballTeam team = new FootballTeam(numberOfGamesWon);
 		assertEquals(numberOfGamesWon, team.getGamesWon());
+	}
+
+	private static Object[] getIllegalNumberOfGamesWon() {
+		return new Object[] { -10, -1 };
+	}
+
+	@ParameterizedTest
+	@MethodSource("getIllegalNumberOfGamesWon")
+	public void constructorShouldThrowExceptionForIllegalGamesNumber(int illegalNumberOfGames) {
+		assertThrows(IllegalArgumentException.class, () -> {
+			new FootballTeam(illegalNumberOfGames);
+		});
 	}
 
 }
