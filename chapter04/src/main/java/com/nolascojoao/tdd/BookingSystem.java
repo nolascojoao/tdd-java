@@ -5,27 +5,29 @@ import java.util.Set;
 
 public class BookingSystem {
 
-	private Set<Integer> bookedHours;
+	private final Set<Integer> bookedHours;
 
 	public BookingSystem() {
 		bookedHours = new HashSet<>();
 	}
 
 	public boolean bookHour(int hour) {
-		if (hour < 0 || hour > 23) {
-			return false;
+		if (isValidHour(hour) && isNotAlreadyBooked(hour)) {
+			bookedHours.add(hour);
+			return true;
 		}
-
-		if (bookedHours.contains(hour)) {
-			return false;
-		}
-
-		bookedHours.add(hour);
-		return true;
+		return false;
 	}
 
 	public Set<Integer> getBookedHours() {
-		return bookedHours;
+		return new HashSet<>(bookedHours);
 	}
 
+	private boolean isValidHour(int hour) {
+		return hour >= 0 && hour <= 23;
+	}
+
+	private boolean isNotAlreadyBooked(int hour) {
+		return !bookedHours.contains(hour);
+	}
 }
