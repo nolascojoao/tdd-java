@@ -10,17 +10,14 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class FootballTeamTest {
 
-	private static final int THREE_GAMES_WON = 3;
 	private static final int ANY_NUMBER = 123;
-
-	@Test
-	public void constructorShouldSetGamesWon() {
-		FootballTeam team = new FootballTeam(THREE_GAMES_WON);
-		assertEquals(THREE_GAMES_WON, team.getGamesWon());
-	}
 
 	private static Object[] getNumberOfGamesWon() {
 		return new Object[] { 0, 1, 2 };
+	}
+	
+	private static Object[] getIllegalNumberOfGamesWon() {
+		return new Object[] { -10, -1 };
 	}
 
 	@ParameterizedTest()
@@ -28,10 +25,6 @@ public class FootballTeamTest {
 	public void constructorShouldSetGamesWon(int numberOfGamesWon) {
 		FootballTeam team = new FootballTeam(numberOfGamesWon);
 		assertEquals(numberOfGamesWon, team.getGamesWon());
-	}
-
-	private static Object[] getIllegalNumberOfGamesWon() {
-		return new Object[] { -10, -1 };
 	}
 
 	@ParameterizedTest
@@ -53,7 +46,7 @@ public class FootballTeamTest {
 	public void teamsWithMoreMatchesWonShouldBeGreater() {
 		FootballTeam team_2 = new FootballTeam(2);
 		FootballTeam team_3 = new FootballTeam(3);
-
+		
 		assertTrue(team_3.compareTo(team_2) > 0,
 				" team with " + team_3.getGamesWon()
 				+ " games won should be ranked before the team with "
@@ -64,7 +57,7 @@ public class FootballTeamTest {
 	public void teamsWithLessMatchesWonShouldBeLesser() {
 		FootballTeam team_2 = new FootballTeam(2);
 		FootballTeam team_3 = new FootballTeam(3);
-
+		
 		assertTrue(team_2.compareTo(team_3) < 0,
 				" team with " + team_2.getGamesWon()
 				+ " games won should be ranked after the team with "
