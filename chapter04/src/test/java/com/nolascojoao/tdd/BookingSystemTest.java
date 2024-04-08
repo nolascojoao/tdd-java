@@ -35,12 +35,14 @@ public class BookingSystemTest {
 		assertFalse(bookingSystem.bookHour(10));
 	}
 
+	@Test
 	public void shouldReturnEmptyBookedHours() {
 		Set<Integer> bookedHours = bookingSystem.getBookedHours();
 		
 		assertTrue(bookedHours.isEmpty());
 	}
 	
+	@Test
 	public void shouldReturnNonEmptyBookedHours() {
 		bookingSystem.bookHour(12);
 		bookingSystem.bookHour(14);
