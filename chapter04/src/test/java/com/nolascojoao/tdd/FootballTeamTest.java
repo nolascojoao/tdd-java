@@ -2,6 +2,7 @@ package com.nolascojoao.tdd;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -10,6 +11,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 public class FootballTeamTest {
 
 	private static final int THREE_GAMES_WON = 3;
+	private static final int ANY_NUMBER = 123;
 
 	@Test
 	public void constructorShouldSetGamesWon() {
@@ -38,6 +40,13 @@ public class FootballTeamTest {
 		assertThrows(IllegalArgumentException.class, () -> {
 			new FootballTeam(illegalNumberOfGames);
 		});
+	}
+
+	@Test
+	public void shouldBePossibleToCompareTeams() {
+		FootballTeam team = new FootballTeam(ANY_NUMBER);
+
+		assertTrue(team instanceof Comparable, "FootballTeam should implement Comparable");
 	}
 
 }
