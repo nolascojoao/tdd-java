@@ -2,6 +2,7 @@ package com.nolascojoao.tdd.race;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import org.junit.jupiter.api.Test;
@@ -38,23 +39,23 @@ public class RaceResultsServiceTest {
 		verify(clientA).receive(message);
 		verify(clientB).receive(message);
 	}
-	
+
 	@Test
 	public void shouldSendOnlyOneMessageToMultiSubscriber() {
 		raceResults.addSubscriber(clientA);
 		raceResults.addSubscriber(clientA);
 		raceResults.send(message);
-		
-		verify(clientA).receive(message);
+
+		verify(clientA, times(1)).receive(message);
 	}
-	
+
 	@Test
 	public void unsubscribedClientShouldNotReceiveMessages() {
 		raceResults.addSubscriber(clientA);
 		raceResults.removeSubscriber(clientA);
-		
+
 		raceResults.send(message);
-		
+
 		verify(clientA, never()).receive(message);
 	}
 
